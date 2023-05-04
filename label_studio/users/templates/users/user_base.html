@@ -1,0 +1,33 @@
+{% extends 'simple.html' %}
+{% load i18n %}
+{% load static %}
+{% load filters %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ settings.HOSTNAME }}{% static 'css/login.css' %}"/>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129877673-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-129877673-1');
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="login_page">
+  <h1>欢迎来到慧智数据标注平台</h1>
+
+  <img src="{{ settings.HOSTNAME }}{% static 'images/opossum_hanging.svg' %}" height="128px" />
+
+  <div class="toggle">
+    {% if not settings.DISABLE_SIGNUP_WITHOUT_LINK %}
+        <a href="{{ settings.HOSTNAME }}/user/signup" class="{% if 'signup' in request.path %}active{% endif %}">注册</a>
+        <a href="{{ settings.HOSTNAME }}/user/login" class="{% if 'login' in request.path %}active{% endif %}">登录</a>
+    {% endif %}
+  </div>
+
+  {% block user_content %}
+  {% endblock %}
+{% endblock %}
